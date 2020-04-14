@@ -1,0 +1,84 @@
+#+TITLE: GCSの操作
+#+STARTUP: indent hidestars inlineimagesg
+
+** バケットの作成
+
+#+BEGIN_SRC restclient
+POST http://127.0.0.1:4443/storage/v1/b?project=symdon-local
+Content-Type: application/json
+
+{
+  "name": "symdon-local"
+}
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC text
+{"kind":"storage#bucket","id":"symdon-local","name":"symdon-local","versioning":{},"timeCreated":"2020-04-14T23:27:29Z"}
+
+POST http://127.0.0.1:4443/storage/v1/b?project=symdon-local
+HTTP/1.1 200 OK
+Date: Tue, 14 Apr 2020 23:27:29 GMT
+Content-Length: 121
+Content-Type: text/plain; charset=utf-8
+Request duration: 0.017608s
+#+END_SRC
+
+
+** ファイルのアップロード
+
+#+BEGIN_SRC restclient
+POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead
+Content-Type: text/plain
+y
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC text
+{"name":"TESTFILE","contentType":"text/plain","contentEncoding":"","crc32c":"WQTkFQ==","md5Hash":"TGYDRkUbjPke9Q9GNEWNQQ==","acl":[{"Entity":"allUsers","EntityID":"","Role":"READER","Domain":"","Email":"","ProjectTeam":null}],"created":"0001-01-01T00:00:00Z","updated":"0001-01-01T00:00:00Z","deleted":"0001-01-01T00:00:00Z"}
+
+POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead
+HTTP/1.1 200 OK
+Date: Tue, 14 Apr 2020 23:32:23 GMT
+Content-Length: 326
+Content-Type: text/plain; charset=utf-8
+Request duration: 0.019545s
+#+END_SRC
+
+
+** ファイルのダウンロード
+
+#+BEGIN_SRC restclient
+GET http://127.0.0.1:4443/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC text
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+GET http://127.0.0.1:4443/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Content-Length: 34
+Content-Type: text/plain
+Date: Tue, 14 Apr 2020 23:33:37 GMT
+Request duration: 0.013700s
+#+END_SRC
+
+#+BEGIN_SRC restclient
+GET://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC text
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+GET http://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Content-Length: 34
+Content-Type: text/plain
+Date: Tue, 14 Apr 2020 23:38:16 GMT
+Request duration: 0.003462s
+#+END_SRC
