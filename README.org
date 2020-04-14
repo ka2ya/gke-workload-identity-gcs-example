@@ -1,0 +1,1 @@
+#+TITLE: GKS上のPodからWorkload Identityを使ってGCSにアクセスする
