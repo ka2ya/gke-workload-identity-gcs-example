@@ -1,1 +1,4 @@
 #+TITLE: GKS上のPodからWorkload Identityを使ってGCSにアクセスする
+
+
+https://hub.docker.com/repository/docker/sximada/gke-workload-identity-gcs-example
