@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+
+kind: Namespace
+metadata:
+  name: gke-workload-identity-gcs-example
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gcs
+  namespace: gke-workload-identity-gcs-example
+spec:
+  containers:
+  - name: app
+    image: sximada/gke-workload-identity-gcs-example
+    env:
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /app/config/application_default_credentials.json
+      - name: STORAGE_EMULATOR_HOST
+        value: http://127.0.0.1:4443
+      - name: BUCKET_NAME
+        value: symdon-local
+
+  - name: gcs
+    image: fsouza/fake-gcs-server
+    args: ["-scheme", "http", "-public-host", "gcs.local"]
+    ports:
+      - containerPort: 4443
+        name: http
+        protocol: TCP

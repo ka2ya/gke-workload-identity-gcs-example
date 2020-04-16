@@ -28,9 +28,9 @@ Request duration: 0.017608s
 ** ファイルのアップロード
 
 #+BEGIN_SRC restclient
-POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead
+POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead&generation=1
 Content-Type: text/plain
-y
+
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #+END_SRC
 
@@ -38,12 +38,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #+BEGIN_SRC text
 {"name":"TESTFILE","contentType":"text/plain","contentEncoding":"","crc32c":"WQTkFQ==","md5Hash":"TGYDRkUbjPke9Q9GNEWNQQ==","acl":[{"Entity":"allUsers","EntityID":"","Role":"READER","Domain":"","Email":"","ProjectTeam":null}],"created":"0001-01-01T00:00:00Z","updated":"0001-01-01T00:00:00Z","deleted":"0001-01-01T00:00:00Z"}
 
-POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead
+POST http://127.0.0.1:4443/upload/storage/v1/b/symdon-local/o?uploadType=media&name=TESTFILE&predefinedAcl=publicRead&generation=1
 HTTP/1.1 200 OK
-Date: Tue, 14 Apr 2020 23:32:23 GMT
+Date: Thu, 16 Apr 2020 01:21:33 GMT
 Content-Length: 326
 Content-Type: text/plain; charset=utf-8
-Request duration: 0.019545s
+Request duration: 0.006802s
 #+END_SRC
 
 
@@ -67,18 +67,18 @@ Request duration: 0.013700s
 #+END_SRC
 
 #+BEGIN_SRC restclient
-GET://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+GET http://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media&Generation=0
 
 #+END_SRC
 
 #+RESULTS:
 #+BEGIN_SRC text
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-GET http://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media
+GET http://127.0.0.1:4443/download/storage/v1/b/symdon-local/o/TESTFILE?alt=media&Generation=0
 HTTP/1.1 200 OK
 Accept-Ranges: bytes
 Content-Length: 34
 Content-Type: text/plain
-Date: Tue, 14 Apr 2020 23:38:16 GMT
-Request duration: 0.003462s
+Date: Thu, 16 Apr 2020 01:26:02 GMT
+Request duration: 0.005828s
 #+END_SRC

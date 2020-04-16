@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: sximada/gke-workload-identity-gcs-example
+    image: sximada/gke-workload-identity-gcs-example:local
     build:
       context: ./app
     environment:
